@@ -1,17 +1,269 @@
 ---
-layout: default
+layout: null
 ---
+<html>
+	<head>
+		<style type='text/css'>
+			body{
+				background: #9b9b9b;
+				font-size: 18px;
+				font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+				animation: fadein 5s;
+				overflow:hidden;
+				margin-top: 1vh;
+				margin-bottom: 1vh;
+				margin-left: 0vh;
+				margin-right: 0vh;
 
-<article class="post">
-  <h1>{{ page.title }}</h1>
+			}
+			
+			p{
+				text-align: left;
+				margin: 9px;
+				line-height: 2em;
+			}
+			h1{
+				text-align: left;
+				margin: 20px;
+			}
+			h2{
+				text-align: right;
+				margin: 20px;
 
-  <div class="entry">
-    {{ content }}
-  </div>
+			}
+			input:focus,
+			select:focus,
+			textarea:focus,
+			button:focus {
+				outline: none;
+			}
+			
+			
+			
+			.block{
+				height: 96vh;
+				width: 98vw;
+				background: #f7f7f7;
+				margin: auto;
+				margin-top: 0vh;
+				display: flex;
+				flex-direction: row;
+				overflow: scroll;
+			}
+			
+			#main{
+				background: #d9d9d9;
+				height: 96vh;
+				width: 98vw;
+				border-top:  1vh solid darkgray;
+				border-bottom:  1vh solid darkgray;
+				border-left:  1vw solid darkgray;
+				border-right:  1vw solid darkgray;
 
-  <div class="date">
-    Written on {{ page.date | date: "%B %e, %Y" }}
-  </div>
+				overflow: scroll;
 
-  {% include disqus.html %}
-</article>
+			}
+			#page{
+				flex-grow:1; 
+				background: lightgray;
+				overflow: scroll;
+				pointer-events: none;
+			}
+			#flippers{
+				flex-grow:1; 
+				background: #b4b4b4; 
+				flex-basis:7vw;
+				line-height: 100vh;
+				font-size:7vh;
+				-webkit-touch-callout: none;
+				-webkit-user-select: none;
+				-khtml-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+			}
+			#content{
+				text-indent: 5vw;
+				margin: 5vh 15vw 10vh 15vw;
+				float: top;
+				
+			}
+			
+			@keyframes fadein {
+			from { opacity:0; 
+					background-color: black;
+			}
+			to   { opacity:1; }
+		}
+		
+		.clear{
+			background-color: #e5e5e5;
+		}
+		.ambient{
+			background-color: #ffcfab;
+		}
+		.normal{
+			background-color: lightgray;
+		}
+		
+			
+		</style>
+		<script>
+			function scrolls(way){
+				if(way==0){document.getElementById('page').scrollTop -= document.getElementById('page').clientHeight - 10;}	
+				if(way==1){document.getElementById('page').scrollTop += document.getElementById('page').clientHeight - 10;}	
+				
+				
+				var Coords = document.getElementsByTagName('p')
+				for(i=0; i<Coords.length; i++){
+					console.log(Coords[i])
+					h = Coords[i].getBoundingClientRect().top;
+					b = Coords[i].getBoundingClientRect().bottom;
+					if(h<0 && b>0){
+						console.log('triggered!')
+						u = document.defaultView.getComputedStyle(Coords[i],null);
+						document.getElementById('page').style.backgroundColor = u.getPropertyValue('background-color')
+						
+						
+					}
+				}
+				
+				
+				
+			}
+			
+colorHasNotChanged = true;
+function scroller(type) {
+	colorHasNotChanged = true;
+	var currentScroll = document.getElementById('page').scrollTop;
+	console.log(document.getElementById('page').scrollTop);
+    var scrollStep = (document.getElementById('page').clientHeight - 10) / (1000 / 15),
+        scrollInterval = setInterval(function(){
+        	var previousScrollTop = document.getElementById('page').scrollTop;
+	        console.log(document.getElementById('page').scrollTop);
+	        console.log('page height '+document.getElementById("content").scrollTopMax);
+	        console.log(currentScroll - type*(document.getElementById('page').clientHeight - 10) + type );
+			if ((document.getElementById('page').scrollTop*(-1)*type >= (currentScroll - type*(document.getElementById('page').clientHeight - 10))*type*(-1)) ) {
+			   clearInterval(scrollInterval);
+				}
+			else{
+				 document.getElementById('page').scrollTop -= scrollStep*type;
+				 if(previousScrollTop == document.getElementById('page').scrollTop){
+				 	clearInterval(scrollInterval);
+				 }
+				 var Coords = document.getElementsByTagName('p');
+					for(i=0; i<Coords.length; i++){
+						console.log(Coords[i]);
+						h = Coords[i].getBoundingClientRect().top;
+						b = Coords[i].getBoundingClientRect().bottom;
+						if(h<0 && b>0){
+							console.log('triggered!');
+							u = document.defaultView.getComputedStyle(Coords[i],null);
+							newColor = u.getPropertyValue('background-color');
+							dniheb = document.getElementById('page');
+							oldColor = document.defaultView.getComputedStyle(dniheb,null).getPropertyValue('background-color');
+							console.log(colorHasNotChanged);
+							if(colorHasNotChanged && oldColor!=newColor){fade(dniheb,'background-color',oldColor,newColor,700)}
+						}
+					}
+
+			}
+        
+    },15);
+}/*
+			function scrollToTop(scrollDuration) {
+    var cosParameter = window.scrollY / 2,
+        scrollCount = 0,
+        oldTimestamp = performance.now();
+    function step (newTimestamp) {
+        scrollCount += Math.PI / (scrollDuration / (newTimestamp - oldTimestamp));
+        if (scrollCount >= Math.PI) window.scrollTo(0, 0);
+        if (window.scrollY === 0) return;
+        window.scrollTo(0, Math.round(cosParameter + cosParameter * Math.cos(scrollCount)));
+        oldTimestamp = newTimestamp;
+        window.requestAnimationFrame(step);
+    }
+    window.requestAnimationFrame(step);
+}*/
+
+
+// linear interpolation between two values a and b
+    // u controls amount of a/b and is in range [0.0,1.0]
+    
+    //Many thanks to Patrick Oscity for his time-saving Javascript color-change animation function!
+    lerp = function(a,b,u) {
+        return (1-u) * a + u * b;
+    };
+
+    (function(elmProto){
+    if ('scrollTopMax' in elmProto) {
+        return;
+    }
+    Object.defineProperties(elmProto, {
+        'scrollTopMax': {
+            get: function scrollTopMax() {
+              return this.scrollHeight - this.clientTop;
+            }
+        },
+        'scrollLeftMax': {
+            get: function scrollLeftMax() {
+              return this.scrollWidth - this.clientLeft;
+            }
+        }
+    });
+}
+)(Element.prototype);
+    fade = function(element, property, starts, ends, duration) {
+		console.log('fade called');
+		  colorHasNotChanged = false;
+		  var interval = 10;
+		  var steps = duration/interval;
+		  var step_u = 1.0/steps;
+		  var u = 0.0;
+
+		  var colorsOnly = starts.substring(starts.indexOf('(') + 1, starts.indexOf(')')).split(/,\s*/),
+		  start = {};
+		  start.r = colorsOnly[0];
+		  start.g = colorsOnly[1];
+		  start.b = colorsOnly[2];
+		  colorsOnly = ends.substring(ends.indexOf('(') + 1, ends.lastIndexOf(')')).split(/,\s*/),
+		  end = {};
+		  end.r = colorsOnly[0];
+		  end.g = colorsOnly[1];
+		  end.b = colorsOnly[2];
+      
+      var theInterval = setInterval(function(){
+        if (u >= 1.0){ 
+	        clearInterval(theInterval) 
+	        element = null
+	        document.getElementById('page').style.backgroundColor = ends
+	        console.log(ends)
+	        console.log(document.getElementById('page').style.backgroundColor)
+			console.log("it's ended!")
+        }
+        var r = parseInt(lerp(start.r, end.r, u));
+        var g = parseInt(lerp(start.g, end.g, u));
+        var b = parseInt(lerp(start.b, end.b, u));
+        var colorname = 'rgb('+r+','+g+','+b+')';
+        element.style.setProperty(property, colorname);
+        u += step_u;
+      }, interval);
+      
+          };
+    
+		</script>
+	</head>
+	<body >
+		<div id='main'> 
+				<div class="block">
+					<div id='flippers' onclick='scroller(1)'> < </div>
+				<div id='page'>
+					 <div id = 'content'>
+              {{ content }}
+					 </div>
+				</div>
+				<div id = 'flippers' onclick="scroller(-1)"> > </div>
+			</div>
+		
+	</body>
+</html>
