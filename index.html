@@ -1,18 +1,39 @@
----
-layout: default
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Waggish</title>
+    <link rel="stylesheet" href="Waggish.css">
+    <script src="Waggish.js"></script>
+</head>
+<body onload="page_popper()">
+    <div id = "title"
+    class="briefcase">
+        <div id="backHome">
+Waggish</div>
+        <h2 style="text-align:left;">Check out the <a>comic</a>, the <a>blog</a>, or our <a> projects</a>.</h2>
+    </div>
+    <!--
+    <div id="comic" class="briefcase">
+        <div id="comicContainer">
+            <div style="flex-basis: 10%;"></div>
+            <button> < </button>
+            <img class ="comicImage" src="comic.png" title = "Hey! The Mouseover text works!"
+                 alt = "Hmm... Looks like the comic didn't load for some reason. Sorry about that.">
+            <button> > </button>
+                        <div style="flex-basis: 10%;"></div>
+        </div>
+    </div>
+     -->
 
-<div class="posts">
-  {% for post in site.posts %}
-    <article class="post">
-
-      <h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
-
-      <div class="entry">
-        {{ post.excerpt }}
-      </div>
-
-      <a href="{{ site.baseurl }}{{ post.url }}" class="read-more">Read More</a>
-    </article>
-  {% endfor %}
-</div>
+    <div class="briefcase">
+        <h1> Orange Cipher</h1>
+        <h3> Quantum resistant, mathematically <i> unbreakable </i>, and simple enough that even an orangutan could use it!</h3>
+        <div class='page'>
+            Meet <b>Orange Cipher </b>. It's based of off the only cipher that's theoretically unbreakable: the one-time pad cipher. Most modern encryption relies on primes and favorable factoring odds (which quantum computers will quickly render obsolete), but Orange Cipher uses good-old fashioned keys. Do you want <i>real</i>, quantum-resistant security? You should check out Orange Cipher.
+            <br>
+            Want to learn more? We'll have a blog post coming up any day now describing how Orange Cipher works. If you want, though, you can dive right in at <a href="http://waggish.me/orange/">waggish.me/orange/</a>.
+        </div>
+    </div>
+</body>
+</html>
