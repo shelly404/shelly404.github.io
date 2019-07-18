@@ -1,12 +1,128 @@
----
-layout: default
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Waglog</title>
+    <link rel="stylesheet" href="Blog.css">
+    <script src="Waggish.js"></script>
+    <script type="text/javascript">
+        function scroll_miester() {
+            // var Coords = document.getElementsByTagName("div");
+            var content = document.getElementById("content");
+            var Coords = content.children;
+            for(i=0; i<Coords.length; i++) {
+                console.log(Coords[i].className)
+                h = Coords[i].getBoundingClientRect().top;
+                b = Coords[i].getBoundingClientRect().bottom;
+                if (h < 0 && b > 0) {
+                    if(Coords[i].className==="briefcase"){
+                        console.log("That's a briefcase. We'll let it be.");
+                        return "Nope.";
+                    }
+                    console.log('triggered!')
+                    u = document.defaultView.getComputedStyle(Coords[i], null);
+                    newColor = u.getPropertyValue('background-color')
+                    dniheb = document.body
+                    oldColor = document.body.style.backgroundColor;
+                    console.log(colorHasNotChanged)
+                    console.log(oldColor)
+                    console.log(newColor)
+                    if (oldColor != newColor) {
+                        fade(dniheb, 'background-color', oldColor, newColor, 700)
+                    }
+                }
+            }
 
-<article class="page">
+        }
 
-  <h1>{{ page.title }}</h1>
+    // linear interpolation between two values a and b
+    // u controls amount of a/b and is in range [0.0,1.0]
 
-  <div class="entry">
-    {{ content }}
-  </div>
-</article>
+    //Many thanks to Patrick Oscity for his time-saving Javascript color-change animation function!
+    lerp = function(a,b,u) {
+        return (1-u) * a + u * b;
+    };
+    colorHasNotChanged = true;
+    fade = function(element, property, starts, ends, duration) {
+	  console.log('fade called')
+	  colorHasNotChanged = false
+      var interval = 10;
+      var steps = duration/interval;
+      var step_u = 1.0/steps;
+      var u = 0.0;
+
+	  var colorsOnly = starts.substring(starts.indexOf('(') + 1, starts.indexOf(')')).split(/,\s*/), start = {};
+	  start.r = colorsOnly[0];
+	  start.g = colorsOnly[1];
+	  start.b = colorsOnly[2];
+      colorsOnly = ends.substring(ends.indexOf('(') + 1, ends.lastIndexOf(')')).split(/,\s*/),
+          end = {};
+	  end.r = colorsOnly[0];
+	  end.g = colorsOnly[1];
+	  end.b = colorsOnly[2];
+
+      var theInterval = setInterval(function(){
+        if (u >= 1.0){
+	        clearInterval(theInterval)
+	        document.body.style.backgroundColor = ends
+	        console.log(ends)
+			console.log("it's ended!")
+        }
+        var r = parseInt(lerp(start.r, end.r, u));
+        var g = parseInt(lerp(start.g, end.g, u));
+        var b = parseInt(lerp(start.b, end.b, u));
+        var colorname = 'rgb('+r+','+g+','+b+')';
+        element.style.setProperty(property, colorname);
+        u += step_u;
+      }, interval);
+
+          };
+
+    async function page_popper(){
+    //Populates the page with divs by popping them into existence
+    divs = document.getElementsByClassName("briefcase")
+    for(i=0;i<divs.length;i++){
+        if(divs[i].id == "title"){
+            divs[i].style.display = "flex"
+        }
+        else{
+            divs[i].style.display = "block"
+        }
+        await sleep(2000)
+    }
+    }
+    function sleep(ms){
+        return new Promise(resolve => setTimeout(resolve,ms));
+    }
+    </script>
+</head>
+<body onload="page_popper()" onscroll="scroll_miester()">
+
+    <div id="title" class="briefcase">
+        <div id="backHome"> W.</div>
+        <div id="titleInfo">
+            <div class="waggishHead">{{ page.title }}</div>
+            <div class = "waggishHead">{{ page.author }}</div>
+        </div>
+    </div>
+
+    <div class = "briefcase">
+        <div class="page" >Hi. We know reading scrolling webpages is annoying. It's so hard to coordinate, and so tempting to skim! That's why we offer mindful alternatives for every blog post. </div>
+        <table style="background: #0f2e4e; color:white; width: 100%; height: 15vh; text-align:center;">
+            <tr>
+                <td style= "color:white; height:">Mindful Reader</td>
+                <td> PDF Download</td>
+                <td> No thanks.</td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="content">
+            {{ content }}
+    </div>
+<!--<div id ="curtainCall" class="briefcase">
+    <h1>Well, that's the end.</h1>
+    Hope you enjoyed that.  Here are some more articles you might find interesting:
+</div>-->
+</body>
+</html>
