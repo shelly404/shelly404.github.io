@@ -3,7 +3,7 @@ layout: default
 ---
 
   {% for post in site.posts %}
-    <article class="briefcase">
+    <div class="briefcase">
 
       <h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
 
@@ -12,6 +12,6 @@ layout: default
       </div>
 
       <a href="{{ site.baseurl }}{{ post.url }}" class="read-more">Read More</a>
-    </article>
+    </div>
   {% endfor %}
 </div>
