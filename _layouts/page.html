@@ -1,250 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Waglog</title>
-    <style type="text.css">
+<html>
+  <head>
+    <title>{% if page.title %}{{ page.title }} – {% endif %}{{ site.name }} – {{ site.description }}</title>
+
+    {% include meta.html %}
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/Waggish.css" />
+    <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}" href="{{ site.baseurl }}/feed.xml" />
+    <script src="{{ site.baseurl }}/Waggish.js"></script>
+    <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+  </head>
+
+  <body onload="page_popper()">
     
-    body{
-    background-color: #e5e5e5;
-    line-height: 3em;
-}
-.briefcase {
-    background: #181703;
-    border-radius: 50px;
-    margin: 6vh;
-    animation: fadein 3s;
-    overflow: hidden;
-    color: white;
-    font-family: "Arial Hebrew";
-    max-height: 60vh;
-    display: none;
-}
-#title{
-    display: flex;
-    flex-direction: row;
-    background-color: #0f2e4e;
-}
-#backHome{
-    color:e5e5e5;
-    font-size: 3em;
-    font-family: Chalkduster,times;
-    flex-grow:1;
-    flex-basis:auto;
-    background: darkslategrey;
-    /*background: url("home.jpeg") no-repeat;*/
-    /*background-size: auto 100%;*/
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-}
-#titleInfo{
-    flex-basis: 80%;
-    width: 80%;
-    height: auto;
-    flex-grow:1;
-}
-.greeter{
-    background: #181703;
-    border-radius: 50px;
-    margin: 6vh;
-    animation: fadein 3s;
-    overflow: hidden;/
-    color: white;
-    font-family: "Arial Hebrew";
-    max-height: 60vh;
-}
-@keyframes fadein {
-    from { opacity:0;
-            background-color: white;
-    }
-    to   { opacity:1; }
-}
-
-a{
-    color: deepskyblue;
-}
-.page{
-    color: white;
-    padding: 3vh 5vw 1vh 5vw;
-    font-size: 3vh;
-    text-space: 10px;
-    line-height: 2em;
-}
-.hinter{
-    color: white;
-    width: 15vw;
-    height: 80vh;
-    padding: 0% 5% 0% 5%;
-    font-size: 3vh;
-    text-space: 10px;
-    line-height: 2em;
-    background: midnightblue;
-    margin-left: 85vw;
-    margin-top: -90vh;
-}
-.clear{
-    background-color: #e5e5e5;
-    margin: 6vh;
-    color: black;
-    padding: 2em;
-}
-.ambient{
-    background-color: rgb(242, 184, 174);
-    margin: 6vh;
-    margin: 6vh;
-    color: #4e000a;
-    padding: 2em;
-}
-.normal{
-    background-color: lightgray;
-    margin: 6vh;
-    margin: 6vh;
-    color: black;
-    padding: 2em;
-}
-.waggishHead{
-    background-color: #0f2e4e;
-    padding: 0.2em 1em 0px 1em;
-    color: beige;
-    margin:0em;
-    border-color: darkslategrey;
-    border-width: 50px;
-    text-align: left;
-    vertical-align: text-bottom;
-}
-.blogHead{
-    background-color: chocolate;
-    width: 95vw;
-    height: 50vh;
-    padding-left: 5vw;
-    font-size: 2em;
-    margin: 0vw;
-
-}
-
+    <div id = "title"
+    class="briefcase" style="overflow: hidden;">
+        <div id="backHome">W</div>
+        <div class = "linker" style="background: #35545e;" onclick="openPage('https://waggish.me/comic.html')">comic</div>
+        <div class = "linker" style="background: #0f556f" onclick="openPage('https://waggish.me/blog.html')"> blog </div>
+        <div class = "linker" style="background: #00435e" onclick="openPage('https://waggish.me/projects.html')"> projects </div>
+    </div>
     
-	</style>
-    <script src="Waggish.js"></script>
-    <script type="text/javascript">
-        function scroll_miester() {
-            // var Coords = document.getElementsByTagName("div");
-            var content = document.getElementById("content");
-            var Coords = content.children;
-            for(i=0; i<Coords.length; i++) {
-                console.log(Coords[i].className)
-                h = Coords[i].getBoundingClientRect().top;
-                b = Coords[i].getBoundingClientRect().bottom;
-                if (h < 0 && b > 0) {
-                    if(Coords[i].className==="briefcase"){
-                        console.log("That's a briefcase. We'll let it be.");
-                        return "Nope.";
-                    }
-                    console.log('triggered!')
-                    u = document.defaultView.getComputedStyle(Coords[i], null);
-                    newColor = u.getPropertyValue('background-color')
-                    dniheb = document.body
-                    oldColor = document.body.style.backgroundColor;
-                    console.log(colorHasNotChanged)
-                    console.log(oldColor)
-                    console.log(newColor)
-                    if (oldColor != newColor) {
-                        fade(dniheb, 'background-color', oldColor, newColor, 700)
-                    }
-                }
-            }
+      {{ content }}
 
-        }
-
-    // linear interpolation between two values a and b
-    // u controls amount of a/b and is in range [0.0,1.0]
-
-    //Many thanks to Patrick Oscity for his time-saving Javascript color-change animation function!
-    lerp = function(a,b,u) {
-        return (1-u) * a + u * b;
-    };
-    colorHasNotChanged = true;
-    fade = function(element, property, starts, ends, duration) {
-	  console.log('fade called')
-	  colorHasNotChanged = false
-      var interval = 10;
-      var steps = duration/interval;
-      var step_u = 1.0/steps;
-      var u = 0.0;
-
-	  var colorsOnly = starts.substring(starts.indexOf('(') + 1, starts.indexOf(')')).split(/,\s*/), start = {};
-	  start.r = colorsOnly[0];
-	  start.g = colorsOnly[1];
-	  start.b = colorsOnly[2];
-      colorsOnly = ends.substring(ends.indexOf('(') + 1, ends.lastIndexOf(')')).split(/,\s*/),
-          end = {};
-	  end.r = colorsOnly[0];
-	  end.g = colorsOnly[1];
-	  end.b = colorsOnly[2];
-
-      var theInterval = setInterval(function(){
-        if (u >= 1.0){
-	        clearInterval(theInterval)
-	        document.body.style.backgroundColor = ends
-	        console.log(ends)
-			console.log("it's ended!")
-        }
-        var r = parseInt(lerp(start.r, end.r, u));
-        var g = parseInt(lerp(start.g, end.g, u));
-        var b = parseInt(lerp(start.b, end.b, u));
-        var colorname = 'rgb('+r+','+g+','+b+')';
-        element.style.setProperty(property, colorname);
-        u += step_u;
-      }, interval);
-
-          };
-
-    async function page_popper(){
-    //Populates the page with divs by popping them into existence
-    divs = document.getElementsByClassName("briefcase")
-    for(i=0;i<divs.length;i++){
-        if(divs[i].id == "title"){
-            divs[i].style.display = "flex"
-        }
-        else{
-            divs[i].style.display = "block"
-        }
-        await sleep(2000)
-    }
-    }
-    function sleep(ms){
-        return new Promise(resolve => setTimeout(resolve,ms));
-    }
-    </script>
-</head>
-<body onload="page_popper()" onscroll="scroll_miester()">
-
-    <div id="title" class="briefcase">
-        <div id="backHome"> W.</div>
-        <div id="titleInfo">
-            <div class="waggishHead">{{ page.title }}</div>
-            <div class = "waggishHead">{{ page.author }}</div>
-        </div>
-    </div>
-
-    <div class = "briefcase">
-        <div class="page" >Hi. We know reading scrolling webpages is annoying. It's so hard to coordinate, and so tempting to skim! That's why we offer mindful alternatives for every blog post. </div>
-        <table style="background: #0f2e4e; color:white; width: 100%; height: 15vh; text-align:center;">
-            <tr>
-                <td style= "color:white; height:">Mindful Reader</td>
-                <td> PDF Download</td>
-                <td> No thanks.</td>
-            </tr>
-        </table>
-    </div>
-
-    <div id="content">
-            {{ content }}
-    </div>
-<!--<div id ="curtainCall" class="briefcase">
-    <h1>Well, that's the end.</h1>
-    Hope you enjoyed that.  Here are some more articles you might find interesting:
-</div>-->
-</body>
+    {% include analytics.html %}
+  </body>
 </html>
