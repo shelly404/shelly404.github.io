@@ -25,8 +25,8 @@ body{
     border-radius: 50px;
     margin: 6vh;
     animation: fadein 3s;
-    overflow: hidden;
     color: white;
+    overflow: scroll;
     font-family: "Arial Hebrew";
     max-height: 60vh;
     display: none;
@@ -35,6 +35,10 @@ body{
     display: flex;
     flex-direction: row;
     background-color: #0f2e4e;
+    vertical-align: middle;
+    align-items: center;
+    justify-content: center;
+    height: 10%;
 }
 button {
     color:ghostwhite;
@@ -53,11 +57,12 @@ button:hover {      background-color: #8dba27;      color: white; }
 }
 #backHome{
     color:e5e5e5;
-    font-size: 3em;
+    font-size: 3vw;
     font-family: Chalkduster,times;
     flex-grow:1;
-    flex-basis:auto;
-    padding: 0.5em;
+    height: 100%;
+    flex-basis:50%;
+    padding: 0.5vh;
     background: darkslategrey;
     /*background: url("home.jpeg") no-repeat;*/
     /*background-size: auto 100%;*/
@@ -65,6 +70,22 @@ button:hover {      background-color: #8dba27;      color: white; }
     align-items: center;
     justify-content: center;
 
+}
+.linker {
+    color: white;
+    font-size: 3vw;
+    flex-grow: 1;
+    flex-basis: auto;
+    height: 100%;
+    padding: 0.5vh;
+    /*background: url("home.jpeg") no-repeat;*/
+    /*background-size: auto 100%;*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+div.linker:hover{
+    background: deepskyblue;
 }
 #comicContainer{
     border-radius: 0px;

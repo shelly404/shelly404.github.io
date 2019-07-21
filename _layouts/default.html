@@ -12,14 +12,22 @@
     <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/Waggish.css" />
     <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}" href="{{ site.baseurl }}/feed.xml" />
     <script src="{{ site.baseurl }}/Waggish.js"></script>
+    <script type="text/javascript">
+        function openPage(url){
+            window.location = url;
+        }
+    </script>
     <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
   </head>
 
   <body onload="page_popper()">
     
-     <div id = "title" class="briefcase">
-       <div id="backHome"> <a href="{{ site.baseurl }}"> W </a> </div>
-        <h2 style="text-align:left;">Check out the <a>comic</a>, the <a>blog</a>, or our <a> projects</a>.</h2>
+    <div id = "title"
+    class="briefcase" style="overflow: hidden;">
+        <div id="backHome" onclick="openPage('https://waggish.me')>W</div>
+        <div class = "linker" style="background: #35545e;" onclick="openPage('https://waggish.me/comic.html')">comic</div>
+        <div class = "linker" style="background: #0f556f" onclick="openPage('https://waggish.me/blog.html')"> blog </div>
+        <div class = "linker" style="background: #00435e" onclick="openPage('https://waggish.me/projects.html')"> projects </div>
     </div>
     
       {{ content }}

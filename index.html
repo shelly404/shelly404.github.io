@@ -5,13 +5,20 @@
     <title>Waggish</title>
     <link rel="stylesheet" href="Waggish.css">
     <script src="Waggish.js"></script>
+    <script type="text/javascript">
+        function openPage(url){
+            window.location = url;
+        }
+    </script>
 </head>
 <body onload="page_popper()">
     <div id = "title"
-    class="briefcase">
-        <div id="backHome">
-Waggish</div>
-        <h2 style="text-align:left;">Check out the <a>comic</a>, the <a>blog</a>, or our <a> projects</a>.</h2>
+    class="briefcase" style="overflow: hidden;">
+        <div id="backHome" onclick="openPage('https://waggish.me')">Waggish</div>
+        <div class = "linker" style="background: #35545e;" onclick="openPage('https://waggish.me/comic.html')">comic</div>
+        <div class = "linker" style="background: #0f556f" onclick="openPage('https://waggish.me/blog.html')"> blog </div>
+        <div class = "linker" style="background: #00435e" onclick="openPage('https://waggish.me/projects.html')"> projects </div>
+    </div>
     </div>
     <!--
     <div id="comic" class="briefcase">
