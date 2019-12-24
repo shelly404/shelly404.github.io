@@ -1,0 +1,118 @@
+body{
+    background-color: #e5e5e5;
+    line-height: 3em;
+}
+.briefcase {
+    background: #181703;
+    border-radius: 50px;
+    margin: 6vh;
+    animation: fadein 3s;
+    overflow: hidden;
+    color: white;
+    font-family: "Arial Hebrew";
+    max-height: 60vh;
+    display: none;
+}
+#title{
+    display: flex;
+    flex-direction: row;
+    background-color: #0f2e4e;
+}
+#backHome{
+    color:e5e5e5;
+    font-size: 3em;
+    font-family: Chalkduster,times;
+    flex-grow:1;
+    flex-basis:auto;
+    background: darkslategrey;
+    /*background: url("home.jpeg") no-repeat;*/
+    /*background-size: auto 100%;*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+#titleInfo{
+    flex-basis: 80%;
+    width: 80%;
+    height: auto;
+    flex-grow:1;
+}
+.greeter{
+    background: #181703;
+    border-radius: 50px;
+    margin: 6vh;
+    animation: fadein 3s;
+    overflow: hidden;/
+    color: white;
+    font-family: "Arial Hebrew";
+    max-height: 60vh;
+}
+@keyframes fadein {
+    from { opacity:0;
+            background-color: white;
+    }
+    to   { opacity:1; }
+}
+
+a{
+    color: deepskyblue;
+}
+.page{
+    color: white;
+    padding: 3vh 5vw 1vh 5vw;
+    font-size: 3vh;
+    text-space: 10px;
+    line-height: 2em;
+}
+.hinter{
+    color: white;
+    width: 15vw;
+    height: 80vh;
+    padding: 0% 5% 0% 5%;
+    font-size: 3vh;
+    text-space: 10px;
+    line-height: 2em;
+    background: midnightblue;
+    margin-left: 85vw;
+    margin-top: -90vh;
+}
+.clear{
+    background-color: #e5e5e5;
+    margin: 6vh;
+    color: black;
+    padding: 2em;
+}
+.ambient{
+    background-color: rgb(242, 184, 174);
+    margin: 6vh;
+    margin: 6vh;
+    color: #4e000a;
+    padding: 2em;
+}
+.normal{
+    background-color: lightgray;
+    margin: 6vh;
+    margin: 6vh;
+    color: black;
+    padding: 2em;
+}
+.waggishHead{
+    background-color: #0f2e4e;
+    padding: 0.2em 1em 0px 1em;
+    color: beige;
+    margin:0em;
+    border-color: darkslategrey;
+    border-width: 50px;
+    text-align: left;
+    vertical-align: text-bottom;
+}
+.blogHead{
+    background-color: chocolate;
+    width: 95vw;
+    height: 50vh;
+    padding-left: 5vw;
+    font-size: 2em;
+    margin: 0vw;
+
+}
